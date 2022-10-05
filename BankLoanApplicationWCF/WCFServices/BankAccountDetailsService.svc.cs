@@ -20,17 +20,17 @@ namespace BankLoanApplicationWCF.WCFServices
         //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
         //     and include the following line in the operation body:
         //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
-        CustomerDataContext dc = new CustomerDataContext();
+        BankDetailsDataContext dc = new BankDetailsDataContext();
 
         [OperationContract]
         [WebInvoke(Method = "POST",
-        UriTemplate = "/AddCustomer",
+        UriTemplate = "/AddBankDetails",
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare)]
-        public void AddCustomer(CustomerModel customer)
+        public void AddBankDetails(BankDetails bankDetails)
         {
-            dc.InsertCustomer(customer);
+            dc.InsertBankDetails(bankDetails);
         }
 
 
@@ -38,22 +38,22 @@ namespace BankLoanApplicationWCF.WCFServices
         [WebInvoke(Method = "DELETE",
            RequestFormat = WebMessageFormat.Json,
            ResponseFormat = WebMessageFormat.Json,
-           UriTemplate = "/DeleteCustomer/{id}")]
+           UriTemplate = "/DeleteBankDetails/{id}")]
 
-        public void DeleteCustomer(string id)
+        public void DeleteBankDetails(string id)
         {
-            var customerId = new Guid(id);
-            dc.DeleteCustomer(customerId);
+            var bankDetailsId = new Guid(id);
+            dc.DeleteBankDetails(bankDetailsId);
         }
 
         [OperationContract]
         [WebInvoke(Method = "GET",
            RequestFormat = WebMessageFormat.Json,
            ResponseFormat = WebMessageFormat.Json,
-           UriTemplate = "GetAllCustomers")]
-        public List<CustomerModel> GetAllCustomers()
+           UriTemplate = "GetAllBankDetails")]
+        public List<BankDetails> GetAllBankDetails()
         {
-            return dc.GetAllCustomers();
+            return dc.GetAllBankDetails();
         }
 
 
@@ -61,11 +61,11 @@ namespace BankLoanApplicationWCF.WCFServices
         [WebInvoke(Method = "GET",
            RequestFormat = WebMessageFormat.Json,
            ResponseFormat = WebMessageFormat.Json,
-           UriTemplate = "GetCustomerById/{Id}")]
-        public CustomerModel GetCustomerById(string Id)
+           UriTemplate = "GetBankDetailsById/{Id}")]
+        public BankDetails GetBankDetailsById(string Id)
         {
-            var customerId = new Guid(Id);
-            return dc.GetCustomerById(customerId);
+            var bankDetailsId = new Guid(Id);
+            return dc.GetBankDetailsById(bankDetailsId);
         }
 
 
@@ -75,10 +75,10 @@ namespace BankLoanApplicationWCF.WCFServices
         RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare)]
-        public void UpdateCustomer(CustomerModel customer, string id)
+        public void UpdateBankDetails(BankDetails bankDetails, string id)
         {
-            var customerId = new Guid(id);
-            dc.UpdateCustomerUsingId(customer, customerId);
+            var bankDetailsId = new Guid(id);
+            dc.UpdateBankDetailsUsingId(bankDetails, bankDetailsId);
         }
 
     }
